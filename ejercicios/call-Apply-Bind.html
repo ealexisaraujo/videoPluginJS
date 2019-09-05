@@ -15,6 +15,17 @@
     <code>this</code> se refiere a un objeto. Ese objeto es el que actualmente
     está ejecutando un pedazo de código.
   </h1> -->
+  <ul>
+    <li>
+      <button class="call-to-action">Aprender</button>
+    </li>
+    <li>
+      <button class="call-to-action">Aprender mas</button>
+    </li>
+    <li>
+      <button class="call-to-action">¡Nunca parar de aprender!</button>
+    </li>
+  </ul>
   <script>
     // Establece `this` usando call
     function saludar() {
@@ -60,6 +71,15 @@
     danielCamina('sur')
 
     // Cuando es utilizar usar uno de estos metodos
+    const buttons = document.getElementsByClassName('call-to-action')
+
+    // buttons.array.forEach(button => {
+    //   button.onClick = () => alert("Nunca pares de aprender")
+    // });
+    Array.prototype.forEach.call(buttons, button => {
+      button.onclick = () => alert("Nunca pares de aprender")
+    })
+    // NodeList
   </script>
 </body>
 
