@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Function.prototype.call, Function.prototype.apply, Function.prototype.bind</title>
+</head>
+
+<body>
+  <a href="./indice.html">Go back</a>
+  <p><em>Abre la consola</em></p>
+  <!-- <h1>
+    <code>this</code> se refiere a un objeto. Ese objeto es el que actualmente
+    está ejecutando un pedazo de código.
+  </h1> -->
+  <script>
+    // Establece `this` usando call
+    function saludar() {
+      console.log(`Hola soy ${this.name} ${this.apellido}`);
+    }
+
+    const alexis = {
+      name: 'Alexis',
+      apellido: 'Lopez'
+    }
+
+    const miguel = {
+      name: 'Miguel',
+      apellido: 'Lopez'
+    }
+
+    saludar.call(alexis)
+
+    // Estable `this` usando `call` y pasar argumentos a la funcion
+    function caminar(metros, direccion) {
+      console.log(`${this.name}, camina ${metros} metros hacia ${direccion}`);
+    }
+
+    caminar.call(miguel, 400, 'norte')
+
+    // Establece `this` usando `apply` y pasar argumentos a la funcion
+    caminar.apply(miguel, [500, 'noreste'])
+
+    /*
+      call - comma ","
+      apply - arreglo "[]""
+    */
+
+    // Establecer `this` en una nueva funcion usando bind
+    const daniel = {
+      name: 'Daniel',
+      apellido: 'Sanchez'
+    }
+    const danielSaluda = saludar.bind(daniel)
+    danielSaluda()
+
+    const danielCamina = caminar.bind(daniel, 2000)
+    danielCamina('sur')
+
+    // Cuando es utilizar usar uno de estos metodos
+  </script>
+</body>
+
+</html>
