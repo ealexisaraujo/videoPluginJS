@@ -34,11 +34,18 @@
     }
 
 
-    function getPopularMovies() {
+    // function getPopularMovies() {
+    //   const url = `https://api.themoviedb.org/3/discover/movie?sort_by=popularity.desc&api_key=${apiKey}`;
+    //   return fetch(url)
+    //     .then(response => response.json())
+    //     .then(data => data.results)
+    // }
+
+    async function getPopularMovies() {
       const url = `https://api.themoviedb.org/3/discover/movie?sort_by=popularity.desc&api_key=${apiKey}`;
-      return fetch(url)
-        .then(response => response.json())
-        .then(data => data.results)
+      const response = await fetch(url);
+      const data = await response.json();
+      return data.results;
     }
 
     async function getTopMoviesIds(n = 3) {
