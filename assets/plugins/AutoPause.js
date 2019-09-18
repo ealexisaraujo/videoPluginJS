@@ -3,6 +3,8 @@ class AutoPause {
     this.threshold = 0.25;
     this.handleIntersection = this.handleIntersection.bind(this);
     this.pausedByScroll = false;
+    this.pausedByVisibility = false;
+    this.handleVisibilityChange = this.handleVisibilityChange.bind(this);
   }
 
   run(player) {
@@ -13,6 +15,7 @@ class AutoPause {
     });
 
     observer.observe(this.player.media);
+    document.addEventListener('visibilitychange', this.handleVisibilityChange);
   }
 
   handleIntersection(entries) {
@@ -23,15 +26,29 @@ class AutoPause {
     if (isVisible) {
       if (this.pausedByScroll) {
         this.pausedByScroll = false;
-        this.player.pause();
+        this.player.play();
       }
     } else {
       if (!this.player.media.paused) {
         this.pausedByScroll = true;
-        this.player.play();
+        this.player.pause();
       }
     }
-    console.log(entry);
+  }
+
+  handleVisibilityChange() {
+    const isVisible = document.visibilityState === 'visible';
+    if (isVisible) {
+      if (this.pausedByVisibility) {
+        this.pausedByVisibility = false;
+        this.player.play();
+      }
+    } else {
+      if (!this.player.media.paused) {
+        this.pausedByVisibility = true;
+        this.player.pause();
+      }
+    }
   }
 }
 
