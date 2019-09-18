@@ -141,19 +141,16 @@ people = ['Isabel', 'Nicole', 'Raul']; // people.push("9000")
 
 var peopleAndNumbers = [];
 peopleAndNumbers.push('Ricardo');
-peopleAndNumbers.push(9001); // Enum
-
-var Color;
-
-(function (Color) {
-  Color["Rojo"] = "Rojo";
-  Color["Verde"] = "Verde";
-  Color["Azul"] = "Azul";
-  Color["Amarillo"] = "Amarillo";
-})(Color || (Color = {}));
-
-var colorFavorito = Color.Amarillo;
-console.log("Mi color favorito es " + colorFavorito); // Any
+peopleAndNumbers.push(9001); // // Enum
+// enum Color {
+//   Rojo = 'Rojo',
+//   Verde = 'Verde',
+//   Azul = 'Azul',
+//   Amarillo = 'Amarillo'
+// }
+// let colorFavorito: Color = Color.Amarillo;
+// console.log(`Mi color favorito es ${colorFavorito}`);
+// Any
 
 var comodin = 'Joker';
 comodin = {
@@ -188,7 +185,33 @@ function fullName(firstName, lastName) {
 }
 
 var richard = fullName('Agente');
-console.log(richard);
+console.log(richard); // Interfaces
+
+var Color;
+
+(function (Color) {
+  Color["Rojo"] = "Rojo";
+  Color["Verde"] = "Verde";
+})(Color || (Color = {}));
+
+var rect = {
+  ancho: 4,
+  alto: 6 // color: Color.Rojo,
+
+};
+
+function area(r) {
+  return r.alto * r.ancho;
+}
+
+var areaRect = area(rect);
+console.log(areaRect);
+
+rect.toString = function () {
+  return this.color ? "Un rectangulo " + this.color : "Un rectangulo";
+};
+
+console.log(rect.toString());
 },{}],"node_modules/parcel-bundler/src/builtins/hmr-runtime.js":[function(require,module,exports) {
 var global = arguments[3];
 var OVERLAY_ID = '__parcel__error__overlay__';
