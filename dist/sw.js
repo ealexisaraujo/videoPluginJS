@@ -157,7 +157,7 @@ function _precache() {
 
           case 2:
             cache = _context.sent;
-            return _context.abrupt("return", cache.addAll(['/', '/index.html', './assets/index.js', '/assets/MediaPlayer.js', '/assets/plugins/AutoPlay.js', '/assets/plugins/AutoPause.js', '/assets/style.css', '/assets/BigBuckBunny.mp4']));
+            return _context.abrupt("return", cache.addAll([]));
 
           case 4:
           case "end":
@@ -266,7 +266,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "61337" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "64597" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};

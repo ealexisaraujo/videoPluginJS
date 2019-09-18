@@ -125,68 +125,90 @@ Object.defineProperty(exports, "__esModule", {
 });
 exports.default = void 0;
 
-function MediaPlayer(config) {
-  this.media = config.el;
-  this.plugins = config.plugins || [];
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
-  this._initPlugins();
-}
+function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
 
-MediaPlayer.prototype._initPlugins = function () {
-  var _this = this;
+function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
 
-  var player = {
-    play: function play() {
-      return _this.play();
-    },
-    pause: function pause() {
-      return _this.pause();
-    },
-    media: this.media,
+var MediaPlayer =
+/*#__PURE__*/
+function () {
+  function MediaPlayer(config) {
+    _classCallCheck(this, MediaPlayer);
 
-    get muted() {
-      return this.media.muted;
-    },
+    this.media = config.el;
+    this.plugins = config.plugins || [];
 
-    set muted(value) {
-      this.media.muted = value;
-    }
-
-  };
-  this.plugins.forEach(function (plugin) {
-    plugin.run(player);
-  });
-}; // MediaPlayer.prototype.play = function() {
-//   this.media.paused ? this.media.play() : this.media.pause();
-// };
-// MediaPlayer.prototype.mute = function() {
-//   this.media.muted = !this.media.muted;
-// };
-
-
-MediaPlayer.prototype.play = function () {
-  this.media.play();
-};
-
-MediaPlayer.prototype.pause = function () {
-  this.media.pause();
-};
-
-MediaPlayer.prototype.toogleplay = function () {
-  if (this.media.paused) {
-    this.play();
-  } else {
-    this.pause();
+    this._initPlugins();
   }
-};
 
-MediaPlayer.prototype.mute = function () {
-  this.media.muted = true;
-};
+  _createClass(MediaPlayer, [{
+    key: "_initPlugins",
+    value: function _initPlugins() {
+      var _this = this;
 
-MediaPlayer.prototype.unmute = function () {
-  this.media.muted = false;
-};
+      var player = {
+        play: function play() {
+          return _this.play();
+        },
+        pause: function pause() {
+          return _this.pause();
+        },
+        media: this.media,
+
+        get muted() {
+          return this.media.muted;
+        },
+
+        set muted(value) {
+          this.media.muted = value;
+        }
+
+      };
+      this.plugins.forEach(function (plugin) {
+        plugin.run(player);
+      });
+    } // MediaPlayer.prototype.play = function() {
+    //   this.media.paused ? this.media.play() : this.media.pause();
+    // };
+    // MediaPlayer.prototype.mute = function() {
+    //   this.media.muted = !this.media.muted;
+    // };
+
+  }, {
+    key: "play",
+    value: function play() {
+      this.media.play();
+    }
+  }, {
+    key: "pause",
+    value: function pause() {
+      this.media.pause();
+    }
+  }, {
+    key: "toogleplay",
+    value: function toogleplay() {
+      if (this.media.paused) {
+        this.play();
+      } else {
+        this.pause();
+      }
+    }
+  }, {
+    key: "mute",
+    value: function mute() {
+      this.media.muted = true;
+    }
+  }, {
+    key: "unmute",
+    value: function unmute() {
+      this.media.muted = false;
+    }
+  }]);
+
+  return MediaPlayer;
+}();
 
 var _default = MediaPlayer;
 exports.default = _default;
@@ -210,26 +232,17 @@ function AutoPlay() {
 
 var _default = AutoPlay;
 exports.default = _default;
-},{}],"assets/plugins/AutoPause.js":[function(require,module,exports) {
+},{}],"assets/plugins/AutoPause.ts":[function(require,module,exports) {
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports.default = void 0;
-
-function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-
-function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
-
-function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
 
 var AutoPause =
-/*#__PURE__*/
+/** @class */
 function () {
   function AutoPause() {
-    _classCallCheck(this, AutoPause);
-
     this.threshold = 0.25;
     this.handleIntersection = this.handleIntersection.bind(this);
     this.pausedByScroll = false;
@@ -237,58 +250,52 @@ function () {
     this.handleVisibilityChange = this.handleVisibilityChange.bind(this);
   }
 
-  _createClass(AutoPause, [{
-    key: "run",
-    value: function run(player) {
-      this.player = player;
-      var observer = new IntersectionObserver(this.handleIntersection, {
-        threshold: this.threshold
-      });
-      observer.observe(this.player.media);
-      document.addEventListener('visibilitychange', this.handleVisibilityChange);
-    }
-  }, {
-    key: "handleIntersection",
-    value: function handleIntersection(entries) {
-      var entry = entries[0];
-      var isVisible = entry.intersectionRatio >= this.threshold;
+  AutoPause.prototype.run = function (player) {
+    this.player = player;
+    var observer = new IntersectionObserver(this.handleIntersection, {
+      threshold: this.threshold
+    });
+    observer.observe(this.player.media);
+    document.addEventListener('visibilitychange', this.handleVisibilityChange);
+  };
 
-      if (isVisible) {
-        if (this.pausedByScroll) {
-          this.pausedByScroll = false;
-          this.player.play();
-        }
-      } else {
-        if (!this.player.media.paused) {
-          this.pausedByScroll = true;
-          this.player.pause();
-        }
+  AutoPause.prototype.handleIntersection = function (entries) {
+    var entry = entries[0];
+    var isVisible = entry.intersectionRatio >= this.threshold;
+
+    if (isVisible) {
+      if (this.pausedByScroll) {
+        this.pausedByScroll = false;
+        this.player.play();
+      }
+    } else {
+      if (!this.player.media.paused) {
+        this.pausedByScroll = true;
+        this.player.pause();
       }
     }
-  }, {
-    key: "handleVisibilityChange",
-    value: function handleVisibilityChange() {
-      var isVisible = document.visibilityState === 'visible';
+  };
 
-      if (isVisible) {
-        if (this.pausedByVisibility) {
-          this.pausedByVisibility = false;
-          this.player.play();
-        }
-      } else {
-        if (!this.player.media.paused) {
-          this.pausedByVisibility = true;
-          this.player.pause();
-        }
+  AutoPause.prototype.handleVisibilityChange = function () {
+    var isVisible = document.visibilityState === 'visible';
+
+    if (isVisible) {
+      if (this.pausedByVisibility) {
+        this.pausedByVisibility = false;
+        this.player.play();
+      }
+    } else {
+      if (!this.player.media.paused) {
+        this.pausedByVisibility = true;
+        this.player.pause();
       }
     }
-  }]);
+  };
 
   return AutoPause;
 }();
 
-var _default = AutoPause;
-exports.default = _default;
+exports.default = AutoPause;
 },{}],"assets/index.js":[function(require,module,exports) {
 "use strict";
 
@@ -296,10 +303,11 @@ var _MediaPlayer = _interopRequireDefault(require("./MediaPlayer.js"));
 
 var _Autoplay = _interopRequireDefault(require("./plugins/Autoplay.js"));
 
-var _AutoPause = _interopRequireDefault(require("./plugins/AutoPause.js"));
+var _AutoPause = _interopRequireDefault(require("./plugins/AutoPause.ts"));
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
+// import AutoPause from './plugins/AutoPause.js';
 var video = document.querySelector('video');
 var player = new _MediaPlayer.default({
   el: video,
@@ -355,7 +363,7 @@ if ('serviceWorker' in navigator) {
 // const player = new MediaPlayer({ el: video });
 // const button = document.querySelector('button');
 // button.onclick = () => player.togglePlay();
-},{"./MediaPlayer.js":"assets/MediaPlayer.js","./plugins/Autoplay.js":"assets/plugins/Autoplay.js","./plugins/AutoPause.js":"assets/plugins/AutoPause.js","/Users/alexisaraujo/Documents/Cursos/videoPluginJS/sw.js":[["sw.js","sw.js"],"sw.js.map","sw.js"]}],"node_modules/parcel-bundler/src/builtins/hmr-runtime.js":[function(require,module,exports) {
+},{"./MediaPlayer.js":"assets/MediaPlayer.js","./plugins/Autoplay.js":"assets/plugins/Autoplay.js","./plugins/AutoPause.ts":"assets/plugins/AutoPause.ts","/Users/alexisaraujo/Documents/Cursos/videoPluginJS/sw.js":[["sw.js","sw.js"],"sw.js.map","sw.js"]}],"node_modules/parcel-bundler/src/builtins/hmr-runtime.js":[function(require,module,exports) {
 var global = arguments[3];
 var OVERLAY_ID = '__parcel__error__overlay__';
 var OldModule = module.bundle.Module;
@@ -383,7 +391,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "61337" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "64597" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};
