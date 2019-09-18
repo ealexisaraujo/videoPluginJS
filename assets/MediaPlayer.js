@@ -23,12 +23,36 @@ MediaPlayer.prototype._initPlugins = function() {
   });
 };
 
+// MediaPlayer.prototype.play = function() {
+//   this.media.paused ? this.media.play() : this.media.pause();
+// };
+
+// MediaPlayer.prototype.mute = function() {
+//   this.media.muted = !this.media.muted;
+// };
+
 MediaPlayer.prototype.play = function() {
-  this.media.paused ? this.media.play() : this.media.pause();
+  this.media.play();
+};
+
+MediaPlayer.prototype.pause = function() {
+  this.media.pause();
+};
+
+MediaPlayer.prototype.toogleplay = function() {
+  if (this.media.paused) {
+    this.play();
+  } else {
+    this.pause();
+  }
 };
 
 MediaPlayer.prototype.mute = function() {
-  this.media.muted = !this.media.muted;
+  this.media.muted = true;
+};
+
+MediaPlayer.prototype.unmute = function() {
+  this.media.muted = false;
 };
 
 export default MediaPlayer;

@@ -2,17 +2,25 @@ import MediaPlayer from './MediaPlayer.js';
 
 import AutoPlay from './plugins/Autoplay.js';
 
+import AutoPause from './plugins/AutoPause.js';
+
 const video = document.querySelector('video');
 const player = new MediaPlayer({
   el: video,
-  plugins: [new AutoPlay()]
+  plugins: [new AutoPlay(), new AutoPause()]
 });
 
 const playButton = document.querySelector('#playButton');
-playButton.onclick = () => player.play();
+playButton.onclick = () => player.toogleplay();
 
 const muteButton = document.querySelector('#muteButton');
-muteButton.onclick = () => player.mute();
+muteButton.onclick = () => {
+  if (player.media.muted) {
+    player.unmute();
+  } else {
+    player.mute();
+  }
+};
 // const video = document.querySelector('video')
 // const button = document.querySelector('button')
 
