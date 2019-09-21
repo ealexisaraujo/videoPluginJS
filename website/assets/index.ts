@@ -1,20 +1,20 @@
-import MediaPlayer from './MediaPlayer.js';
-
-import AutoPlay from './plugins/Autoplay.js';
+import MediaPlayer from '@alexisaraujo/platzimediaplayer';
+import AutoPlay from '@alexisaraujo/platzimediaplayer/lib/plugins/Autoplay';
+import AutoPause from '@alexisaraujo/platzimediaplayer/lib/plugins/AutoPause';
+import Ads from '@alexisaraujo/platzimediaplayer/lib/plugins/Ads';
 
 // import AutoPause from './plugins/AutoPause.js';
-import AutoPause from './plugins/AutoPause.ts';
 
 const video = document.querySelector('video');
 const player = new MediaPlayer({
   el: video,
-  plugins: [new AutoPlay(), new AutoPause()]
+  plugins: [new AutoPlay(), new AutoPause(), new Ads()]
 });
 
-const playButton = document.querySelector('#playButton');
+const playButton: HTMLElement = document.querySelector('#playButton');
 playButton.onclick = () => player.toogleplay();
 
-const muteButton = document.querySelector('#muteButton');
+const muteButton: HTMLElement = document.querySelector('#muteButton');
 muteButton.onclick = () => {
   if (player.media.muted) {
     player.unmute();

@@ -15,7 +15,7 @@ let age = 6;
 let numerador: number = 42;
 let denominador: number = age;
 let resultado = numerador / denominador;
-
+console.log(`${age}`);
 // String
 let nombre: string = 'Richard';
 let saludo = `Me llamo ${nombre}`;

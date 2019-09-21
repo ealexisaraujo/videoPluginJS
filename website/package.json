@@ -6,6 +6,10 @@
   "scripts": {
     "start": "parcel index.html ejercicios/indice.html ejercicios/**/*.html"
   },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ealexisaraujo/videoPluginJS.git"
+  },
   "keywords": [],
   "author": "",
   "license": "ISC",
@@ -15,5 +19,8 @@
   },
   "browserlist": [
     "last 1 Chrome version"
-  ]
+  ],
+  "dependencies": {
+    "@alexisaraujo/platzimediaplayer": "^1.0.0"
+  }
 }

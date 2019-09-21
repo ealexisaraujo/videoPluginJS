@@ -37,7 +37,7 @@ function EmailFieldDecorator(field: Field) {
   field.validate = function() {
     validate();
     let value = field.input.value;
-    if (value.indexOf("@") === -1) {
+    if (value.indexOf('@') === -1) {
       field.errors.push('Debe ser un email');
     }
   };
@@ -45,5 +45,5 @@ function EmailFieldDecorator(field: Field) {
 }
 
 let field = new Field(document.querySelector('#email'));
-field = RequiredFieldDecorator(field));
-field = EmailFieldDecorator(field)
+field = RequiredFieldDecorator(field);
+field = EmailFieldDecorator(field);
